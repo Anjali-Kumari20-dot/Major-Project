@@ -29,6 +29,10 @@ async function main() {
   await mongoose.connect(Mongo_URL);
 }
 
+app.use((err, req, res, next) => {
+  res.send("Something went wrong!");
+});
+
 app.listen(8080, () => {
   console.log("Server is listening to port 8080");
 });
@@ -83,3 +87,4 @@ app.delete("/listings/:id", async (req, res) => {
   let deletedListing = await Listing.findByIdAndDelete(id);
   res.redirect("/listings");
 });
+

@@ -7,21 +7,21 @@ const listingSchema = new Schema({
     required: true,
   },
   description: String,
-  ImageTrack: {
+  image: {
     type: {
       filename: String,
       url: String,
     },
     default:{
       filename: "",
-      url: "/images/ken-cheung-KonWFWUaAuk-unsplash.jpg",
+      url: "https://images.unsplash.com/photo-1488462237308-ecaa28b729d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
     },
     set: (v) => 
       v === "" 
-        ? "/images/ken-cheung-KonWFWUaAuk-unsplash.jpg" 
+        ? "https://images.unsplash.com/photo-1488462237308-ecaa28b729d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60" 
         : v,
   },
-  // image: String,
+
   price: Number,
   location: String,
   country: String,
