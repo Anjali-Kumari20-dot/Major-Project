@@ -4,6 +4,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
+const password = require("passport-local");
+const passMongoose = require("passport-local-mongoose");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
@@ -36,6 +38,7 @@ router.post(
   wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success", "New listing created!");
     res.redirect("/listings");
   })
 );
@@ -46,6 +49,10 @@ router.get(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews");
+    if(!listing) {
+      req.flash("error", "Listing you requested for does not exist!");
+      res.redirect("/listings");
+    }
     res.render("listings/show.ejs", { listing });
   })
 );
@@ -56,6 +63,10 @@ router.get(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
+    if(!listing) {
+      req.flash("error", "Listing you requested for does not exist!");
+      res.redirect("/listings");
+    }
     res.render("Listings/edit.ejs", { listing });
   })
 );
@@ -77,6 +88,7 @@ router.delete(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted");
     res.redirect("/listings");
   })
 );

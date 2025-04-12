@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 // INDEX- USERS
 router.get("/", (req, res) => {
     res.send("GET for users");
