@@ -4,8 +4,6 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
-const password = require("passport-local");
-const passMongoose = require("passport-local-mongoose");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
