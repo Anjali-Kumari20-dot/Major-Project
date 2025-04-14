@@ -36,23 +36,36 @@ const sessionOptions = {
   }
 };
 
+// ye maine khud kiya hai
+const configurePassport = () => {
+  passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+  }, User.authenticate()));
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
+}
+
+configurePassport();
+
 app.get("/", (req, res) => {
   res.send("Hi, I am your root");
 });
 
 app.use(session(sessionOptions));
 app.use(flash());
-
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new LocalStrategy(User.authenticate()));
+
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
