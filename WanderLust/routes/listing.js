@@ -36,6 +36,7 @@ router.post(
   validateListing,
   wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
+    console.log(req.user);
     newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success", "New listing created!");
@@ -54,6 +55,8 @@ router.get(
       res.redirect("/listings");
     }
     console.log(listing);
+    console.log(listing.image);
+    // console.log(listing.owner);
     res.render("listings/show.ejs", { listing });
   })
 );
@@ -69,7 +72,7 @@ router.get(
       req.flash("error", "Listing you requested for does not exist!");
       res.redirect("/listings");
     }
-    res.render("Listings/edit.ejs", { listing });
+    res.render("listings/edit.ejs", { listing });
   })
 );
 
