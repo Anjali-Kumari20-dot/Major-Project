@@ -2,8 +2,15 @@
 <body>
   <div class="row mt-3">
     <div class="col-8 offset-2">
-      <h3>Creating New Listing :</h3><br><br>
-      <form method="POST" action="/listings" novalidate class="needs-validation">
+      <h3>Creating New Listing :</h3>
+      <br /><br />
+      <form
+        method="POST"
+        action="/listings"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input
@@ -17,18 +24,33 @@
         </div>
         <div class="mb-3">
           <label for="title" class="form-label">Description</label>
-          <textarea name="listing[description]" class="form-control" required></textarea>
+          <textarea
+            name="listing[description]"
+            class="form-control"
+            required
+          ></textarea>
           <div class="invalid-feedback">Please enter a short description</div>
         </div>
         <!-- image -->
+
+        <!-- Mam image -->
+        <!-- <div class="mb-3">
+          <label for="image" class="form-label">Image link</label>
+          <input
+            type="text"
+            name="listing[image]"
+            placeholder="Enter image URL/Link"
+            class="form-control"
+          />
+        </div> -->
+
         <div class="mb-3">
-          <label for="image" class="form-label">Image Link</label>
+          <label for="image" class="form-label">Upload Listing Image</label>
           <input
             name="listing[image][url]"
-            placeholder="enter image URL/Link"
-            type="text"
+            type="file"
             class="form-control"
-            value='https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
+            value="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
           />
         </div>
 
