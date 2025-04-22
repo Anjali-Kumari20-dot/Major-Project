@@ -39,6 +39,7 @@ module.exports.validateListing = (req, res, next) => {
 };
 
 module.exports.validateReview = (req, res, next) => {
+  console.log("Incoming request body: ", req.body);// Added this
   let { error } = reviewSchema.validate(req.body);
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(",");

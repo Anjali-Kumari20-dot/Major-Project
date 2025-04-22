@@ -28,6 +28,11 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
 
+app.use((req, res, next) => {
+  console.log("Recived Request body: ",req.body);
+  next();
+})
+
 const Mongo_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 const sessionOptions = {
